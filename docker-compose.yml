@@ -35,7 +35,7 @@ services:
     links:
       - database
       - ollamaphp
-    command: sh -c 'until nc -z database 3306; do echo "Waiting for the database to become available..."; sleep 1; done; php bin/console messenger:consume async'
+    command: sh -c 'until nc -z database 3306; do echo "Waiting for the database to become available..."; sleep 1; done; php bin/console messenger:consume async -vv'
     extra_hosts:
       - "host.docker.internal:host-gateway"
   mailer:
