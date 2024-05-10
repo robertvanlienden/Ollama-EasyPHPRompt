@@ -5,6 +5,19 @@ Simple test project for Ollama (local use LLM).
 
 With this project, you can simply add `PromtTypes` to re-use on every request.
 
+## Features
+- Pre-define prompt types for re-use
+- Add 
+
+## Example use
+### Generating Blog Articles
+- Add a `Prompt Type` with the following PromptPrefix: `Write a blog article with the following keywords:`
+- Use this Prompt Type on http://localhost/ and fill in the `data` with keywords for your 
+
+### Parse datasets
+- Add a `Prompt Type` with the following PromptPrefix: `Parse the following data to the format: Name, Date of Birth`
+- Use this Prompt Type on http://localhost/ and fill in the `data` with information you have.
+
 ## Requirements
 - Docker
 
@@ -15,3 +28,5 @@ With this project, you can simply add `PromtTypes` to re-use on every request.
    a. Example; **Name:** `Blog`. **Prompt Prefix:** `Write a blog article with the following keywords:`
 4. http://localhost/ => Add some ollama_request with the prompt type you just created
 5. http://localhost/ollama/request/ to view your request. Output is available when processed by the queue.
+
+Run `./Taskfile` for a complete list of `Taskfile` commands.

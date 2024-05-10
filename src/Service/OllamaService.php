@@ -22,7 +22,7 @@ class OllamaService {
             new Message('user',
                 $promptPrefix . "\n"
                      . $input . "." .
-                "I want titles and headings as markdown format"),
+                "I want titles and headings as markdown format. Just only output information, no extra questions."),
         ]);
 
         $message = '';
