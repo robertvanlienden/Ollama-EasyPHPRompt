@@ -1,0 +1,17 @@
+// Images
+img {
+  max-width: 100%;
+}
+
+$primary: #278e9a;
+// Boostrap/bootswatch
+@import "~bootswatch/dist/lumen/variables";
+@import "~bootstrap";
+
+@import "~bootswatch/dist/lumen/bootswatch";
+
+// Fontawesome
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';

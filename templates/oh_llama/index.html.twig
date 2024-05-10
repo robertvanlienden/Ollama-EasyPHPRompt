@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello OhLlamaController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>
+        Blog writer
+    </h1>
+    <h2>Vul steekwoorden in en krijg een blog</h2>
+    {% if message %}
+        <h2>Jouw blog artikel</h2>
+        <p>
+            {{ message|raw }}
+        </p>
+    {% endif %}
+
+    {{ form_start(form) }}
+    {{ form_end(form) }}
+</div>
+{% endblock %}

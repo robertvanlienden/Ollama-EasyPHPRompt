@@ -1,0 +1,154 @@
+#!/usr/bin/env bash
+
+function banner {
+  echo -e "${YELLOW}"
+
+  echo -e "${ENDCOLOR}"
+}
+
+##
+## ═══ Basic project setup ═══
+function task:install { ## Install project
+    dep:exists docker
+    task:start
+}
+
+function task:init { ## Alias for install
+    task:install
+}
+
+function task:build { ## (Re)builds docker images
+    dockercompose build --no-cache
+}
+
+function task:update { ## Update + start the project and install dependencies
+    task:start
+    docker:exec "composer install"
+}
+
+##
+## ═══ Dev env. control ══════
+function task:start { ## Start the project
+    dockercompose up -d
+    echo "Project viewable on http://localhost"
+}
+
+function task:stop { ## Stop the project
+    dockercompose down --remove-orphans
+}
+
+function task:remove { ## Remove all volumes and networks
+    task:stop
+    dockercompose down -v
+}
+
+function task:restart { ## Restart the project
+    task:stop
+    task:start
+}
+
+function task:shell { ## Open a shell inside app container
+    docker:assert_running
+    dockercompose exec php sh
+}
+
+function task:logs { ## Monitor the logs of a service
+    dockercompose logs $@
+}
+
+function docker:exec {
+    docker:assert_running
+    dockercompose exec php sh -c "$1"
+}
+
+function docker:assert_running {
+    if [ -z "$(docker compose ps -q)" ]; then
+        task:start
+    fi
+}
+
+function dockercompose {
+    docker compose "$@"
+}
+
+function task:dockercompose { ## Allows to execute docker compose commands in the correct context
+    dockercompose "$@"
+}
+
+##
+## ═══ Codestyle and tests ═══
+function task:codestyle { ## Run codestyle
+    task:codestyle-fix --dry-run
+}
+
+function task:codestyle-fix { ## Fix codestyle problems
+    docker:exec "./vendor/bin/php-cs-fixer fix $1"
+}
+
+function task:format { ## Alias for codestyle-fix
+    task:codestyle-fix
+}
+
+##
+## ═══ Misc. tasks ═══════════
+function task:console { ## Call artisan inside the app container (with any arguments you pass it)
+    docker:exec "bin/console $*"
+}
+
+##
+## ═══ Database tasks ═══════════
+function task:diff { ## Migration diff
+    task:console doctrine:migrations:diff
+}
+function task:migrate { ## M
+    task:console doctrine:migrations:migrate -n
+}
+
+##
+## ═══ Help ══════════════════
+function task:help { ## Prints this index
+    awk 'BEGIN {FS = " { [#][#][ ]?"} \
+        /^([a-zA-Z_-]*:?.*)(\{ )?[#][#][ ]?/ {printf "\033[33m%-50s\033[0m %s\n", $1, $2}' $0 \
+        | sed -E 's/[#]{2,}[ ]*//g' \
+        | sed -E 's/function task:*//g'
+
+    echo ""
+    echo "Usage:"
+    echo "$0 <task> <args>"
+}
+
+#
+# ═══ Env variables ═════════
+
+# Used for colored output
+RED="\e[31m"
+GREEN="\e[32m"
+YELLOW="\e[33m"
+ENDCOLOR="\e[0m"
+
+#
+# ═══ Utilities/plumbing ═══
+set -eo pipefail
+
+function fs:exists {
+    if [ ! -f $1 ]; then
+      echo "No such file $1"
+      exit 255
+    fi
+}
+
+function fs:ensure {
+    if [ ! -f $1 ]; then
+        cp $2 $1
+    fi
+}
+
+function dep:exists {
+    if [ ! $(which "$1") ]; then
+      echo "Dependency '$1' is not installed, please make it available"
+      exit 255
+    fi
+}
+
+banner
+"task:${@:-help}"

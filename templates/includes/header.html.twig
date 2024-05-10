@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-lg p-3 bg-light bg-opacity-25">
+    <div class="container-fluid">
+        <div class="px-4">
+            <div class="navbar-brand">
+                <div>
+                    <a href="{{ path('app_oh_llama') }}" class="text-dark">
+                        <strong>ollama</strong>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link {% if app.request.pathInfo == path('app_home') %}active{% endif %}"#}
+{#                       aria-current="page" href="{{ path('app_home') }}">Home</a>#}
+{#                </li>#}
+{#                <a class="nav-link {% if app.request.pathInfo == path('app_puzzle_tour_index') %}active{% endif %}"#}
+{#                   aria-current="page" href="{{ path('app_puzzle_tour_index') }}">My Puzzle Tours</a>#}
+{#                </li>#}
+            </ul>
+{#            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">#}
+{#                {% if app.user %}#}
+{#                <li class="nav-item dropdown">#}
+{#                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"#}
+{#                       aria-expanded="false">#}
+{#                        Welcome {{ app.user.email }}#}
+{#                        {% if is_granted('ROLE_ADMIN') %}#}
+{#                            <div class="badge bg-primary">Admin</div>#}
+{#                        {% endif %}#}
+{#                        {% if not is_granted('ROLE_ACTIVE_USER') %}#}
+{#                            <div class="badge bg-warning">Email not verified</div>#}
+{#                        {% endif %}#}
+{#                    </a>#}
+{#                    <ul class="dropdown-menu">#}
+{#                        <li><a class="dropdown-item" href="#">Need help?</a></li>#}
+{#                        <li>#}
+{#                            <hr class="dropdown-divider">#}
+{#                        </li>#}
+{#                        <li><a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a></li>#}
+{#                    </ul>#}
+{#                </li>#}
+{#                {% else %}#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link {% if app.request.pathInfo == path('app_register') %}active{% endif %}"#}
+{#                           href="{{ path('app_register') }}">Register</a>#}
+{#                    </li>#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link {% if app.request.pathInfo == path('app_login') %}active{% endif %}"#}
+{#                           href="{{ path('app_login') }}">Login</a>#}
+{#                    </li>#}
+{#                {% endif %}#}
+{#            </ul>#}
+        </div>
+    </div>
+</nav>

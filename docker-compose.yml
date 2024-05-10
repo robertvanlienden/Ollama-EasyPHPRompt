@@ -1,0 +1,75 @@
+services:
+  nginx:
+    image: nginx:1.15
+    ports:
+      - 80:80
+    links:
+      - php
+      - database
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./:/app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  php:
+    build:
+      dockerfile: Dockerfile
+      target: php-fpm-dev
+    environment:
+      - APP_ENV=dev
+    volumes:
+      - ./:/app
+    links:
+      - database
+      - ollamaphp
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  mailer:
+    image: schickling/mailcatcher
+    ports:
+      - "1080:1080" # web
+      - "1025:1025" # smtp
+  database:
+    image: mariadb:10.6.11
+    restart: on-failure
+    volumes:
+#      - ./dev/docker/mysql/:/docker-entrypoint-initdb.d/
+      - database-volume:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: database
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 23306:3306
+  ollamaphp:
+    volumes:
+      - ./ollama/ollama:/root/.ollama
+    container_name: ollamaphp
+    pull_policy: always
+    tty: true
+    restart: unless-stopped
+    image: ollama/ollama:latest
+    ports:
+      - 11434:11434
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+  ollama-webuiphp:
+    image: ghcr.io/ollama-webui/ollama-webui:main
+    container_name: ollama-webuiphp
+    volumes:
+      - ./ollama/ollama-webui:/app/backend/data
+    depends_on:
+      - ollamaphp
+    ports:
+      - 3000:8080
+    environment:
+      - '/ollama/api=http://ollama:11434/api'
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    restart: unless-stopped
+volumes:
+  database-volume:
