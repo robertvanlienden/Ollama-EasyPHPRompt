@@ -2,17 +2,19 @@
 
 namespace App\Controller;
 
+use App\Entity\OllamaRequest;
 use App\Form\ChatFormType;
-use App\Service\OllamaService;
-use Parsedown;
+use App\Message\OllamaMessage;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 class OhLlamaController extends AbstractController
 {
-    public function __construct(private OllamaService $ollamaService)
+    public function __construct(private MessageBusInterface $bus, private EntityManagerInterface $manager)
     {
     }
 
@@ -23,10 +25,13 @@ class OhLlamaController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $message = $this->ollamaService->handleDutchBlogPost($form->getData()['data']);
-            $parseDown = new Parsedown();
-            $message = $parseDown->text($message);
-            $message = str_replace("\n", "<br>", $message);
+            $ollamaRequest = new OllamaRequest();
+            $ollamaRequest->setInput($form->getData()['data']);
+            $this->manager->persist($ollamaRequest);
+            $this->manager->flush();
+
+            $this->bus->dispatch(new OllamaMessage($ollamaRequest->getId()));
+            $this->addFlash('success', 'Added request to queue.');
         }
 
         return $this->render('oh_llama/index.html.twig', [

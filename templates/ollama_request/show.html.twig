@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OllamaRequest{% endblock %}
+
+{% block body %}
+    <h1>OllamaRequest</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ollama_request.id }}</td>
+            </tr>
+            <tr>
+                <th>Input</th>
+                <td>{{ ollama_request.input }}</td>
+            </tr>
+            <tr>
+                <th>Output</th>
+                <td>{{ ollama_request.output|raw }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ollama_request_index') }}">back to list</a>
+
+    <a href="{{ path('app_ollama_request_edit', {'id': ollama_request.id}) }}">edit</a>
+
+    {{ include('ollama_request/_delete_form.html.twig') }}
+{% endblock %}

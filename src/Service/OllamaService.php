@@ -20,12 +20,17 @@ class OllamaService {
     {
         $request = new ChatRequest('llama3', [
             new Message('user',
-                "Schrijf een Nederlandse blogpost van maximaal 1500 tekens met de volgende steekwoorden; \n
+                "Schrijf een Nederlandse blogpost met de volgende steekwoorden; \n
                     " . $input . "." .
                 "Ik wil titels en headings als markdown"),
-
         ]);
 
-        return $this->client->chat($request)->message->content;
+        $message = '';
+
+        foreach ($this->client->chatStream($request) as $chunk) {
+            $message .= $chunk->message->content;
+        }
+
+        return $message;
     }
 }

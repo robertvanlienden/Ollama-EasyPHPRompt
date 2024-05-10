@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OllamaRequest index{% endblock %}
+
+{% block body %}
+    <h1>OllamaRequest index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Input</th>
+                <th>Output</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ollama_request in ollama_requests %}
+            <tr>
+                <td>{{ ollama_request.id }}</td>
+                <td>{{ ollama_request.input }}</td>
+                <td>{{ ollama_request.output ? 'Output aanwezig' : 'Geen output' }}</td>
+                <td>
+                    <a href="{{ path('app_ollama_request_show', {'id': ollama_request.id}) }}">show</a>
+                    <a href="{{ path('app_ollama_request_edit', {'id': ollama_request.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ollama_request_new') }}">Create new</a>
+{% endblock %}

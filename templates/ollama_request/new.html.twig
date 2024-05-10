@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New OllamaRequest{% endblock %}
+
+{% block body %}
+    <h1>Create new OllamaRequest</h1>
+
+    {{ include('ollama_request/_form.html.twig') }}
+
+    <a href="{{ path('app_ollama_request_index') }}">back to list</a>
+{% endblock %}

@@ -15,13 +15,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-{#                <li class="nav-item">#}
-{#                    <a class="nav-link {% if app.request.pathInfo == path('app_home') %}active{% endif %}"#}
-{#                       aria-current="page" href="{{ path('app_home') }}">Home</a>#}
-{#                </li>#}
-{#                <a class="nav-link {% if app.request.pathInfo == path('app_puzzle_tour_index') %}active{% endif %}"#}
-{#                   aria-current="page" href="{{ path('app_puzzle_tour_index') }}">My Puzzle Tours</a>#}
-{#                </li>#}
+                <li class="nav-item">
+                    <a class="nav-link {% if app.request.pathInfo == path('app_oh_llama') %}active{% endif %}"
+                       aria-current="page" href="{{ path('app_oh_llama') }}">Home</a>
+                </li>
+                <a class="nav-link {% if app.request.pathInfo == path('app_ollama_request_index') %}active{% endif %}"
+                   aria-current="page" href="{{ path('app_ollama_request_index') }}">Mijn aanvragen</a>
+                </li>
             </ul>
 {#            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">#}
 {#                {% if app.user %}#}
