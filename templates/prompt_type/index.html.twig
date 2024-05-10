@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PromptType index{% endblock %}
+
+{% block body %}
+    <h1>PromptType index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>PromptPrefix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for prompt_type in prompt_types %}
+            <tr>
+                <td>{{ prompt_type.id }}</td>
+                <td>{{ prompt_type.name }}</td>
+                <td>{{ prompt_type.promptPrefix }}</td>
+                <td>
+                    <a href="{{ path('app_prompt_type_show', {'id': prompt_type.id}) }}">show</a>
+                    <a href="{{ path('app_prompt_type_edit', {'id': prompt_type.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_prompt_type_new') }}">Create new</a>
+{% endblock %}

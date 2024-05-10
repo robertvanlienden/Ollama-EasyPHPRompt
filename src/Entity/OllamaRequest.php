@@ -36,6 +36,9 @@ class OllamaRequest
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $doneAt = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $promptPrefix = null;
+
     public function __construct() {
         $this->setCreatedAt(new DateTimeImmutable());
         $this->status = 'NEW';
@@ -114,6 +117,18 @@ class OllamaRequest
     public function setDoneAt(?\DateTimeImmutable $doneAt): static
     {
         $this->doneAt = $doneAt;
+
+        return $this;
+    }
+
+    public function getPromptPrefix(): ?string
+    {
+        return $this->promptPrefix;
+    }
+
+    public function setPromptPrefix(?string $promptPrefix): static
+    {
+        $this->promptPrefix = $promptPrefix;
 
         return $this;
     }

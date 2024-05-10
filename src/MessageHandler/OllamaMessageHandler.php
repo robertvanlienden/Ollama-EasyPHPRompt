@@ -31,7 +31,7 @@ final class OllamaMessageHandler
         $this->entityManager->persist($request);
         $this->entityManager->flush();
 
-        $response = $this->ollamaService->handleDutchBlogPost($request->getInput());
+        $response = $this->ollamaService->handleDutchBlogPost($request->getInput(), $request->getPromptPrefix());
         $response = str_replace("\n", "<br>", $this->parseMarkdown($response));
 
         $request->setOutput($response);

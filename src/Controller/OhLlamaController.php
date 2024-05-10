@@ -27,6 +27,8 @@ class OhLlamaController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $ollamaRequest = new OllamaRequest();
             $ollamaRequest->setInput($form->getData()['data']);
+            $ollamaRequest->setPromptPrefix($form->getData()['promptType']);
+
             $this->manager->persist($ollamaRequest);
             $this->manager->flush();
 

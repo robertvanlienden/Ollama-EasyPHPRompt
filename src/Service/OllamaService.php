@@ -16,12 +16,12 @@ class OllamaService {
         $this->client = $builder->create('http://ollamaphp:11434');
     }
 
-    public function handleDutchBlogPost(string $input): string
+    public function handleDutchBlogPost(string $input, string $promptPrefix): string
     {
         $request = new ChatRequest('llama3', [
             new Message('user',
-                "Write a blog post with the following keywords; \n
-                    " . $input . "." .
+                $promptPrefix . "\n"
+                     . $input . "." .
                 "I want titles and headings as markdown format"),
         ]);
 
