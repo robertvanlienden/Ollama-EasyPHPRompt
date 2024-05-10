@@ -9,17 +9,25 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Status</th>
+                <th>Created at</th>
+                <th>Picked up by worker at</th>
+                <th>Done at</th>
                 <th>Input</th>
                 <th>Output</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for ollama_request in ollama_requests %}
             <tr>
                 <td>{{ ollama_request.id }}</td>
+                <td>{{ ollama_request.status }}</td>
+                <td>{{ ollama_request.createdAt|date }}</td>
+                <td>{{ ollama_request.pickedUpByWorkerAt|date ? ollama_request.pickedUpByWorkerAt|date : '' }}</td>
+                <td>{{ ollama_request.doneAt ? ollama_request.doneAt|date : '' }}</td>
                 <td>{{ ollama_request.input }}</td>
-                <td>{{ ollama_request.output ? 'Output aanwezig' : 'Geen output' }}</td>
+                <td>{{ ollama_request.output ? 'Output available' : 'Output unavailable' }}</td>
                 <td>
                     <a href="{{ path('app_ollama_request_show', {'id': ollama_request.id}) }}">show</a>
                     <a href="{{ path('app_ollama_request_edit', {'id': ollama_request.id}) }}">edit</a>
@@ -27,7 +35,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="6">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

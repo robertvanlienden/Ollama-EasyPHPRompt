@@ -21,14 +21,15 @@ final class OllamaMessageHandler
         $repository = $this->entityManager->getRepository(OllamaRequest::class);
         $request = $repository->findOneBy(['id' => $message->ollamaRequestId]);
 
-        $request->setStatus('PROCESSING');
-        $this->entityManager->persist($request);
-        $this->entityManager->flush();
-
         if (!$request) {
             echo "Request not found";
             return;
         }
+
+        $request->setStatus('PROCESSING');
+        $request->setPickedUpByWorkerAt(new \DateTimeImmutable());
+        $this->entityManager->persist($request);
+        $this->entityManager->flush();
 
         $response = $this->ollamaService->handleDutchBlogPost($request->getInput());
         $parseDown = new Parsedown();
@@ -37,6 +38,7 @@ final class OllamaMessageHandler
 
         $request->setOutput($response);
         $request->setStatus('DONE');
+        $request->setDoneAt(new \DateTimeImmutable());
 
         $this->entityManager->persist($request);
         $this->entityManager->flush();

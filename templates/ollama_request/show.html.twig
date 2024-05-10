@@ -16,6 +16,13 @@
                 <td>{{ ollama_request.status }}</td>
             </tr>
             <tr>
+                <th>Picked up by worker at</th>
+                <td>{{ ollama_request.pickedUpByWorkerAt ? ollama_request.pickedUpByWorkerAt|date : '' }}</td>            </tr>
+            </tr>
+            <tr>
+                <th>Done at</th>
+                <td>{{ ollama_request.doneAt|date ? ollama_request.doneAt|date : '' }}</td>
+            <tr>
                 <th>Input</th>
                 <td>{{ ollama_request.input }}</td>
             </tr>

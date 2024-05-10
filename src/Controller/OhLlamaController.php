@@ -35,9 +35,7 @@ class OhLlamaController extends AbstractController
         }
 
         return $this->render('oh_llama/index.html.twig', [
-            'controller_name' => 'OhLlamaController',
             'form' => $form,
-            'message' => $message ?? null,
         ]);
     }
 }

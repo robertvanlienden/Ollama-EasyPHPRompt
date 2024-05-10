@@ -20,9 +20,9 @@ class OllamaService {
     {
         $request = new ChatRequest('llama3', [
             new Message('user',
-                "Schrijf een Nederlandse blogpost met de volgende steekwoorden; \n
+                "Write a blog post with the following keywords; \n
                     " . $input . "." .
-                "Ik wil titels en headings als markdown"),
+                "I want titles and headings as markdown format"),
         ]);
 
         $message = '';
