@@ -16,7 +16,7 @@ class OllamaService {
         $this->client = $builder->create('http://ollamaphp:11434');
     }
 
-    public function handleDutchBlogPost(string $input, string $promptPrefix, string $promptSuffix): string
+    public function handleDutchBlogPost(string $input, string $promptPrefix, ?string $promptSuffix = ''): string
     {
         $request = new ChatRequest($this->model, [
             new Message('user',
