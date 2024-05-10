@@ -24,6 +24,20 @@ services:
       - ollamaphp
     extra_hosts:
       - "host.docker.internal:host-gateway"
+  worker:
+    build:
+      dockerfile: Dockerfile
+      target: php-fpm-dev
+    environment:
+      - APP_ENV=dev
+    volumes:
+      - ./:/app
+    links:
+      - database
+      - ollamaphp
+    command: sh -c 'until nc -z database 3306; do echo "Waiting for the database to become available..."; sleep 1; done; php bin/console messenger:consume async'
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   mailer:
     image: schickling/mailcatcher
     ports:
@@ -33,7 +47,6 @@ services:
     image: mariadb:10.6.11
     restart: on-failure
     volumes:
-#      - ./dev/docker/mysql/:/docker-entrypoint-initdb.d/
       - database-volume:/var/lib/mysql
     environment:
       MYSQL_DATABASE: database
