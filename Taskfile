@@ -26,6 +26,11 @@ function task:update { ## Update + start the project and install dependencies
     docker:exec "composer install"
 }
 
+function task:ollama-pull { ## Pull an LLM from ollama
+    task:start
+    dockercompose exec ollamaphp sh -c "ollama pull $1"
+}
+
 ##
 ## ═══ Dev env. control ══════
 function task:start { ## Start the project
