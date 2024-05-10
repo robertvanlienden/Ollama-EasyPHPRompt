@@ -33,9 +33,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_ollama_request_index') }}">back to list</a>
-
-    <a href="{{ path('app_ollama_request_edit', {'id': ollama_request.id}) }}">edit</a>
+    <a href="{{ path('app_ollama_request_index') }}">Back to list</a>
 
     {{ include('ollama_request/_delete_form.html.twig') }}
 {% endblock %}

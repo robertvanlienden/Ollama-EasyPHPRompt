@@ -32,9 +32,7 @@ final class OllamaMessageHandler
         $this->entityManager->flush();
 
         $response = $this->ollamaService->handleDutchBlogPost($request->getInput());
-        $parseDown = new Parsedown();
-        $response = $parseDown->text($response);
-        $response = str_replace("\n", "<br>", $response);
+        $response = str_replace("\n", "<br>", $this->parseMarkdown($response));
 
         $request->setOutput($response);
         $request->setStatus('DONE');
@@ -42,5 +40,12 @@ final class OllamaMessageHandler
 
         $this->entityManager->persist($request);
         $this->entityManager->flush();
+    }
+
+    private function parseMarkdown(string $input)
+    {
+        $parseDown = new Parsedown();
+
+        return $parseDown->text($input);
     }
 }
