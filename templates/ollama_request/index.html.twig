@@ -26,7 +26,7 @@
                 <td>{{ ollama_request.createdAt|date }}</td>
                 <td>{{ ollama_request.pickedUpByWorkerAt ? ollama_request.pickedUpByWorkerAt|date : '' }}</td>
                 <td>{{ ollama_request.doneAt ? ollama_request.doneAt|date : '' }}</td>
-                <td>{{ ollama_request.input }}</td>
+                <td>{{ ollama_request.input|u.truncate(50, '...')|nl2br }}</td>
                 <td>{{ ollama_request.output ? 'Output available' : 'Output unavailable' }}</td>
                 <td>
                     <a href="{{ path('app_ollama_request_show', {'id': ollama_request.id}) }}">show</a>

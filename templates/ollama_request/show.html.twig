@@ -23,12 +23,12 @@
                 <th>Done at</th>
                 <td>{{ ollama_request.doneAt|date ? ollama_request.doneAt|date : '' }}</td>
             <tr>
-                <th>Input</th>
-                <td>{{ ollama_request.input }}</td>
-            </tr>
-            <tr>
                 <th>Prefix</th>
                 <th>{{ ollama_request.promptPrefix }}</th>
+            </tr>
+            <tr>
+                <th>Input</th>
+                <td>{{ ollama_request.input|nl2br }}</td>
             </tr>
             <tr>
                 <th>Output</th>
