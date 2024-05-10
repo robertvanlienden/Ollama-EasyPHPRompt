@@ -1,5 +1,9 @@
 # Olllama test
+## Warning; Just some quick-and-dirty POC! Don't expect nice and shiny things!
+
 Simple test project for Ollama.
+
+Just playing around with it, trying to create some nice things.
 
 ## Requirements
 - Docker
