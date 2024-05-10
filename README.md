@@ -7,7 +7,7 @@ With this project, you can simply add `PromtTypes` to re-use on every request.
 
 ## Features
 - Pre-define prompt types for re-use
-- Add 
+- Add requests with your own data using the pre-defined prompts
 
 ## Example use
 ### Generating Blog Articles
