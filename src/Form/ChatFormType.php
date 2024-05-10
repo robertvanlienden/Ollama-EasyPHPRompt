@@ -19,7 +19,7 @@ class ChatFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('promptType', ChoiceType::class, [
+            ->add('promptTypeId', ChoiceType::class, [
                 'choices' => $options['choices'],
                 'multiple' => false,
             ])
@@ -31,7 +31,7 @@ class ChatFormType extends AbstractType
     {
         $choices = [];
         foreach ($this->promptTypeRepository->findAll() as $promptType) {
-            $choices[$promptType->getName()] = $promptType->getPromptPrefix();
+            $choices[$promptType->getName()] = $promptType->getId();
         }
 
         $resolver->setDefaults([

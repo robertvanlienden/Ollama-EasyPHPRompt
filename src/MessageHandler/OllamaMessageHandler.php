@@ -18,27 +18,27 @@ final class OllamaMessageHandler
 
     public function __invoke(OllamaMessage $message)
     {
-        $repository = $this->entityManager->getRepository(OllamaRequest::class);
-        $request = $repository->findOneBy(['id' => $message->ollamaRequestId]);
+        $ollamaRequestRepository = $this->entityManager->getRepository(OllamaRequest::class);
+        $ollamaRequest = $ollamaRequestRepository->findOneBy(['id' => $message->ollamaRequestId]);
 
-        if (!$request) {
+        if (!$ollamaRequest) {
             echo "Request not found";
             return;
         }
 
-        $request->setStatus('PROCESSING');
-        $request->setPickedUpByWorkerAt(new \DateTimeImmutable());
-        $this->entityManager->persist($request);
+        $ollamaRequest->setStatus('PROCESSING');
+        $ollamaRequest->setPickedUpByWorkerAt(new \DateTimeImmutable());
+        $this->entityManager->persist($ollamaRequest);
         $this->entityManager->flush();
 
-        $response = $this->ollamaService->handleDutchBlogPost($request->getInput(), $request->getPromptPrefix());
+        $response = $this->ollamaService->handleDutchBlogPost($ollamaRequest->getInput(), $ollamaRequest->getPromptPrefix(), $ollamaRequest->getPromptSuffix());
         $response = str_replace("\n", "<br>", $this->parseMarkdown($response));
 
-        $request->setOutput($response);
-        $request->setStatus('DONE');
-        $request->setDoneAt(new \DateTimeImmutable());
+        $ollamaRequest->setOutput($response);
+        $ollamaRequest->setStatus('DONE');
+        $ollamaRequest->setDoneAt(new \DateTimeImmutable());
 
-        $this->entityManager->persist($request);
+        $this->entityManager->persist($ollamaRequest);
         $this->entityManager->flush();
     }
 

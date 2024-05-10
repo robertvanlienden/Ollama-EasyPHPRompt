@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello OhLlamaController!{% endblock %}
+{% block title %}Welcome to OllamaPHPRompt!{% endblock %}
 
 {% block body %}
 
@@ -12,5 +12,16 @@
 
     {{ form_start(form) }}
     {{ form_end(form) }}
+
+    <h2>Available models</h2>
+    <p>This models are available:</p>
+    <ul>
+        {% for model in models %}
+            <li>{{ model.name }}</li>
+        {% endfor %}
+    </ul>
+    <p>
+        You can set the model in the .env
+    </p>
 </div>
 {% endblock %}

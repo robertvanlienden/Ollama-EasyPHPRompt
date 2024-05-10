@@ -1,12 +1,11 @@
-# Olllama test
-## Warning; Just some quick-and-dirty POC! Don't expect nice and shiny things!
-
-Simple test project for Ollama (local use LLM).
+# Ollama EasyPHPRompt
+## Warning; Just some quick-and-dirty POC! Don't expect nice and shiny things! I just hack around to create some cool stuff with ollama here :)
+Simple test project for [Ollama](https://ollama.com/) (local use LLM).
 
 With this project, you can simply add `PromtTypes` to re-use on every request.
 
 ## Features
-- Pre-define prompt types for re-use
+- Pre-define prompt prefix/suffixes for re-use
 - Add requests with your own data using the pre-defined prompts
 
 ## Example use

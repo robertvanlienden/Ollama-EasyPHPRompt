@@ -39,6 +39,9 @@ class OllamaRequest
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $promptPrefix = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $promptSuffix = null;
+
     public function __construct() {
         $this->setCreatedAt(new DateTimeImmutable());
         $this->status = 'NEW';
@@ -132,4 +135,17 @@ class OllamaRequest
 
         return $this;
     }
+
+    public function getPromptSuffix(): ?string
+    {
+        return $this->promptSuffix;
+    }
+
+    public function setPromptSuffix(?string $promptSuffix): static
+    {
+        $this->promptSuffix = $promptSuffix;
+
+        return $this;
+    }
+
 }

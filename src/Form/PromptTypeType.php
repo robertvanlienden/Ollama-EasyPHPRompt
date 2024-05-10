@@ -14,6 +14,7 @@ class PromptTypeType extends AbstractType
         $builder
             ->add('name')
             ->add('promptPrefix')
+            ->add('promptSuffix')
         ;
     }
 

@@ -1,16 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}PromptType index{% endblock %}
+{% block title %}Prompt type overview{% endblock %}
 
 {% block body %}
-    <h1>PromptType index</h1>
+    <h1>Prompt type overiew overview</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>PromptPrefix</th>
+                <th>Prompt prefix</th>
+                <th>Prompt suffix</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,6 +21,7 @@
                 <td>{{ prompt_type.id }}</td>
                 <td>{{ prompt_type.name }}</td>
                 <td>{{ prompt_type.promptPrefix }}</td>
+                <td>{{ prompt_type.promptSuffix }}</td>
                 <td>
                     <a href="{{ path('app_prompt_type_show', {'id': prompt_type.id}) }}">show</a>
                     <a href="{{ path('app_prompt_type_edit', {'id': prompt_type.id}) }}">edit</a>
@@ -27,11 +29,12 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">No records found <a href="{{ path('app_prompt_type_new') }}">Create your first</a> </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_prompt_type_new') }}">Create new</a>
+    <p>
+        <a href="{{ path('app_prompt_type_new') }}" class="btn btn-success">Create new</a>
+    </p>
 {% endblock %}

@@ -16,12 +16,13 @@ class OllamaService {
         $this->client = $builder->create('http://ollamaphp:11434');
     }
 
-    public function handleDutchBlogPost(string $input, string $promptPrefix): string
+    public function handleDutchBlogPost(string $input, string $promptPrefix, string $promptSuffix): string
     {
         $request = new ChatRequest($this->model, [
             new Message('user',
                 $promptPrefix . "\n"
-                     . $input . "." .
+                     . $input . ".\n\n" .
+                $promptSuffix . "\n\n" .
                 "I want titles and headings as markdown format. Just only output information, no extra questions."),
         ]);
 
@@ -32,5 +33,10 @@ class OllamaService {
         }
 
         return $message;
+    }
+
+    public function getAvailableModels()
+    {
+        return $this->client->list()->models;
     }
 }
