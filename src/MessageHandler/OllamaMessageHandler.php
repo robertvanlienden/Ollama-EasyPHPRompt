@@ -21,6 +21,10 @@ final class OllamaMessageHandler
         $repository = $this->entityManager->getRepository(OllamaRequest::class);
         $request = $repository->findOneBy(['id' => $message->ollamaRequestId]);
 
+        $request->setStatus('PROCESSING');
+        $this->entityManager->persist($request);
+        $this->entityManager->flush();
+
         if (!$request) {
             echo "Request not found";
             return;
@@ -32,6 +36,7 @@ final class OllamaMessageHandler
         $response = str_replace("\n", "<br>", $response);
 
         $request->setOutput($response);
+        $request->setStatus('DONE');
 
         $this->entityManager->persist($request);
         $this->entityManager->flush();

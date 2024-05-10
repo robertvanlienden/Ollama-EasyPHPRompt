@@ -20,6 +20,14 @@ class OllamaRequest
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $output = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $status = null;
+
+    public function __construct()
+    {
+        $this->status = 'NEW';
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +53,18 @@ class OllamaRequest
     public function setOutput(?string $output): static
     {
         $this->output = $output;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }
