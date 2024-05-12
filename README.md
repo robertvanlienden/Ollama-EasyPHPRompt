@@ -2,10 +2,20 @@
 ## Warning; Just some quick-and-dirty POC! Don't expect nice and shiny things! I just hack around to create some cool stuff with ollama here :)
 This is a test project for Ollama, using it locally as an LLM (Large Language Model). With this project, you can easily reuse and manage "Prompt Types" to streamline your requests. You can also use these prompt types with your own API integrations.
 
+All created request are getting picked up async with Symfony Message and the Doctrine driver.
+
 ## Features
 - Pre-define customizable prompt prefixes/suffixes for efficient reuse in various tasks.
 - Add new data-based requests using the pre-defined prompts for improved workflow.
 - An accessible API (documented at http://localhost/api) built with API Platform that allows you to create requests through your own application or website.
+
+## Screenshots
+### Prompt overview
+![A overview of all the prompts](screenshots/prompt-overview.png "Prompt overview")
+### Prompt creation
+![Prompt creation](screenshots/request-creation.png "Prompt creation")
+### Generated prompt
+![Generated prompt](screenshots/generated-prompt.png "Generate prompt")
 
 ## Requirements
 - [Docker](https://www.docker.com/)
