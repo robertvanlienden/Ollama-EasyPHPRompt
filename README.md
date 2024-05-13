@@ -43,3 +43,6 @@ Run `./Taskfile` for a complete list of `Taskfile` commands.
 ### Parse datasets
 - Add a `Prompt Type` with the following PromptPrefix: `Parse the following data to the format: Name, Date of Birth`
 - Use this Prompt Type on http://localhost:82/ and fill in the `data` with information you have.
+
+## Donations
+Want to support me creating stuff like this? Consider donating with [PayPal](https://www.paypal.me/robertvanlienden).
