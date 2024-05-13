@@ -7,7 +7,7 @@ All created request are getting picked up async with Symfony Message and the Doc
 ## Features
 - Pre-define customizable prompt prefixes/suffixes for efficient reuse in various tasks.
 - Add new data-based requests using the pre-defined prompts for improved workflow.
-- An accessible API (documented at http://localhost/api) built with API Platform that allows you to create requests through your own application or website.
+- An accessible API (documented at http://localhost:82/api) built with API Platform that allows you to create requests through your own application or website.
 
 ## Screenshots
 ### Prompt overview
@@ -27,18 +27,18 @@ Install Docker on your machine (if not already installed).
 ### Setup project
 1. `./Taskfile init` (you may need to do this 2 times, too lazy to fix migrations for both worker and PHP container...)
 2. Download the `llama3` model by running `./Taskfile ollama-pull llama3` (or your own model, you can switch to your favorite model in the `.env`)
-3. Add some prompts to http://localhost/prompt/type/
+3. Add some prompts to http://localhost:82/prompt/type/
    a. Example; **Name:** `Blog`. **Prompt Prefix:** `Write a blog article with the following keywords:`
-4. http://localhost/ => Add some ollama_request with the prompt type you just created
-5. http://localhost/ollama/request/ to view your request. Output is available when processed by the queue.
+4. http://localhost:82/ => Add some ollama_request with the prompt type you just created
+5. http://localhost:82/ollama/request/ to view your request. Output is available when processed by the queue.
 
 Run `./Taskfile` for a complete list of `Taskfile` commands.
 
 ## Example uses
 ### Generating Blog Articles
 - Add a `Prompt Type` with the following PromptPrefix: `Write a blog article with the following keywords:`
-- Use this Prompt Type on http://localhost/ and fill in the `data` with keywords for your prompt
+- Use this Prompt Type on http://localhost:82/ and fill in the `data` with keywords for your prompt
 
 ### Parse datasets
 - Add a `Prompt Type` with the following PromptPrefix: `Parse the following data to the format: Name, Date of Birth`
-- Use this Prompt Type on http://localhost/ and fill in the `data` with information you have.
+- Use this Prompt Type on http://localhost:82/ and fill in the `data` with information you have.
