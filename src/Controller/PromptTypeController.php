@@ -18,7 +18,7 @@ class PromptTypeController extends AbstractController
     public function index(PromptTypeRepository $promptTypeRepository): Response
     {
         return $this->render('prompt_type/index.html.twig', [
-            'prompt_types' => $promptTypeRepository->findAll(),
+            'prompt_types' => $promptTypeRepository->findBy([], ['name' => 'ASC']),
         ]);
     }
 

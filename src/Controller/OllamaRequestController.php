@@ -18,7 +18,7 @@ class OllamaRequestController extends AbstractController
     public function index(OllamaRequestRepository $ollamaRequestRepository): Response
     {
         return $this->render('ollama_request/index.html.twig', [
-            'ollama_requests' => $ollamaRequestRepository->findAll(),
+            'ollama_requests' => $ollamaRequestRepository->findBy([], ['createdAt' => 'DESC']),
         ]);
     }
 
