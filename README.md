@@ -8,6 +8,7 @@ All created request are getting picked up async with Symfony Message and the Doc
 - Pre-define customizable prompt prefixes/suffixes for efficient reuse in various tasks.
 - Add new data-based requests using the pre-defined prompts for improved workflow.
 - An accessible API (documented at http://localhost:82/api) built with API Platform that allows you to create requests through your own application or website.
+- Can be used with the following chrome extension: [robertvanlienden/Ollama-EasyPHPRompt-chrome-extension](https://github.com/robertvanlienden/Ollama-EasyPHPRompt-chrome-extension)
 
 ## Screenshots
 ### Prompt overview
