@@ -27,7 +27,8 @@ Install Docker on your machine (if not already installed).
 
 ### Setup project
 1. `./Taskfile init` (you may need to do this 2 times, too lazy to fix migrations for both worker and PHP container...)
-2. Download the `llama3` model by running `./Taskfile ollama-pull llama3` (or your own model, you can switch to your favorite model in the `.env`)
+2. `./Taskfile migrate`
+3. Download the `llama3` model by running `./Taskfile ollama-pull llama3` (or your own model, you can switch to your favorite model in the `.env`)
 3. Add some prompts to http://localhost:82/prompt/type/
    a. Example; **Name:** `Blog`. **Prompt Prefix:** `Write a blog article with the following keywords:`
 4. http://localhost:82/ => Add some ollama_request with the prompt type you just created
