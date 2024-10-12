@@ -1,4 +1,4 @@
-# Ollama EasyPHPRompt
+# Ollama EasyPrompt
 ## Warning; Just some quick-and-dirty POC! Don't expect nice and shiny things! I just hack around to create some cool stuff with ollama here :)
 This is a test project for Ollama, using it locally as an LLM (Large Language Model). With this project, you can easily reuse and manage "Prompt Types" to streamline your requests. You can also use these prompt types with your own API integrations.
 
@@ -8,7 +8,7 @@ All created request are getting picked up async with Symfony Message and the Doc
 - Pre-define customizable prompt prefixes/suffixes for efficient reuse in various tasks.
 - Add new data-based requests using the pre-defined prompts for improved workflow.
 - An accessible API (documented at http://localhost:82/api) built with API Platform that allows you to create requests through your own application or website.
-- Can be used with the following chrome extension: [robertvanlienden/Ollama-EasyPHPRompt-chrome-extension](https://github.com/robertvanlienden/Ollama-EasyPHPRompt-chrome-extension)
+- Can be used with the following chrome extension: [robertvanlienden/Ollama-EasyPrompt-chrome-extension](https://github.com/robertvanlienden/Ollama-EasyPrompt-chrome-extension)
 
 ## Screenshots
 ### Prompt overview
